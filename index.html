@@ -109,18 +109,36 @@ items.forEach((item,i)=>{
  board.appendChild(b);
 });
 function update(){document.getElementById('count').textContent=chosen.size;document.getElementById('bar').style.width=(chosen.size/16*100)+'%'}
-document.getElementById('decode').addEventListener('click',()=>{
- if (!window.reflectionCounted) {
-   window.reflectionCounted = true;
-  
- const result=document.getElementById('result'); result.classList.add('show');
- const n=chosen.size;
- document.getElementById('resultTitle').textContent=n===16?'All 16? Iconic. Keep it going!':n>=10?'Look at those little wins ✦':n>=5?'Every small action counts.':'A starting point, not a score.';
- document.getElementById('resultText').textContent=n===0?'Kamu belum memilih kotak apa pun—nggak apa-apa. Coba baca daftarnya, lalu pilih yang pernah kamu lakukan. Tujuannya refleksi, bukan penilaian.':`Kamu memilih ${n} dari 16 tindakan. Ini bukan ukuran apakah kamu “orang baik” atau tidak—setiap tindakan adalah kebiasaan yang bisa terus dipelajari. Berikut nilai Pancasila yang terkait dengan contoh-contoh di bingo ini.`;
- const relevant=[...new Set([...chosen].map(i=>items[i].sila))]; if(!relevant.length) relevant.push(1,2,3,4,5);
- document.getElementById('values').innerHTML=relevant.map(s=>`<div class="value"><strong>Sila ${s} · ${explanations[s][0]}</strong><p>${explanations[s][1]}</p></div>`).join('');
- result.scrollIntoView({behavior:'smooth',block:'start'});
+
+document.getElementById('decode').addEventListener('click', () => {
+  const result = document.getElementById('result');
+  result.classList.add('show');
+
+  const n = chosen.size;
+
+  document.getElementById('resultTitle').textContent =
+    n === 16 ? 'All 16? Iconic. Keep it going!' :
+    n >= 10 ? 'Look at those little wins ✦' :
+    n >= 5 ? 'Every small action counts.' :
+    'A starting point, not a score.';
+
+  document.getElementById('resultText').textContent =
+    n === 0
+      ? 'Kamu belum memilih kotak apa pun—nggak apa-apa. Coba baca daftarnya, lalu pilih yang pernah kamu lakukan. Tujuannya refleksi, bukan penilaian.'
+      : `Kamu memilih ${n} dari 16 tindakan. Ini bukan ukuran apakah kamu “orang baik” atau tidak—setiap tindakan adalah kebiasaan yang bisa terus dipelajari. Berikut nilai Pancasila yang terkait dengan contoh-contoh di bingo ini.`;
+
+  const relevant = [...new Set([...chosen].map(i => items[i].sila))];
+
+  if (!relevant.length) relevant.push(1, 2, 3, 4, 5);
+
+  document.getElementById('values').innerHTML =
+    relevant.map(s =>
+      `<div class="value"><strong>Sila ${s} · ${explanations[s][0]}</strong><p>${explanations[s][1]}</p></div>`
+    ).join('');
+
+  result.scrollIntoView({ behavior: 'smooth', block: 'start' });
 });
+
 document.getElementById('reset').addEventListener('click',()=>{chosen.clear();document.querySelectorAll('.tile').forEach(b=>{b.setAttribute('aria-pressed','false');b.querySelector('.check').textContent=''});update();document.getElementById('result').classList.remove('show')});
 
 const recommendation = document.getElementById('recommendation');
