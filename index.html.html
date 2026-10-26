@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pancasila, IRL. — Little Things, Big Values</title>
+<style>
+:root{--cream:#f6efe3;--paper:#fffaf2;--ink:#352b27;--muted:#75675d;--terra:#cf6847;--peach:#f0d4c3;--sage:#dce8d5;--line:#e5d8c8;--gold:#e8c66a}
+*{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.5}
+.wrap{max-width:900px;margin:auto;padding:22px 16px 48px}.top{display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;font-weight:800}.pill{border:1px solid var(--line);padding:7px 11px;border-radius:99px;letter-spacing:.02em;background:var(--paper)}
+.hero{padding:45px 0 28px;max-width:720px}.eyebrow{color:var(--terra);font-size:.8rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase}.hero h1{font-size:clamp(2.6rem,8vw,5.6rem);line-height:.95;letter-spacing:-.07em;margin:12px 0 18px}.hero h1 span{color:var(--terra)}.hero p{max-width:560px;color:var(--muted);font-size:1.06rem;margin:0}.note{display:inline-block;margin-top:18px;padding:8px 12px;background:var(--gold);border-radius:7px;font-size:.82rem;font-weight:700;transform:rotate(-1deg)}
+.panel{background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:clamp(16px,4vw,28px);box-shadow:0 8px 0 rgba(53,43,39,.04);margin-top:18px}.panelhead{display:flex;justify-content:space-between;align-items:start;gap:14px;margin-bottom:16px}.panel h2{font-size:1.4rem;line-height:1.1;margin:0 0 5px;letter-spacing:-.03em}.sub{color:var(--muted);font-size:.9rem;margin:0}.progressbox{text-align:right;min-width:92px}.count{font-weight:900;font-size:1.25rem}.bar{height:7px;background:#eee3d6;border-radius:20px;overflow:hidden;margin-top:6px}.bar span{display:block;height:100%;width:0;background:var(--terra);transition:width .2s}
+.bingo{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}.tile{min-height:120px;border:1.5px solid var(--line);border-radius:13px;background:#fbf3e8;padding:12px 8px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:7px;font:inherit;color:var(--ink);cursor:pointer;transition:transform .15s,border-color .15s,background .15s}.tile:hover{transform:translateY(-2px);border-color:var(--terra)}.tile .num{font-size:.67rem;color:var(--muted);font-weight:800;letter-spacing:.08em}.tile .txt{font-size:clamp(.72rem,2.2vw,.91rem);line-height:1.3;font-weight:700}.tile .check{height:21px;width:21px;border-radius:50%;border:1px solid #c8b6a4;display:grid;place-items:center;font-size:.75rem}.tile[aria-pressed="true"]{background:var(--sage);border-color:#94b18b}.tile[aria-pressed="true"] .check{background:#537b4c;color:white;border-color:#537b4c}.tile.free{background:#f1dfd1;border-color:#e4bba4}.tile.free .check{background:var(--terra);color:white;border-color:var(--terra)}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}.btn{border:0;border-radius:99px;padding:12px 17px;background:var(--ink);color:white;font:inherit;font-weight:800;cursor:pointer}.btn.secondary{background:transparent;color:var(--ink);border:1px solid var(--line)}.btn:focus-visible,.tile:focus-visible{outline:3px solid var(--terra);outline-offset:3px}
+.result{display:none;margin-top:16px;padding:18px;border-radius:15px;background:#f3e5d5}.result.show{display:block}.result h3{margin:0 0 6px;font-size:1.25rem}.result p{margin:0;color:#5e4e43}.values{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:14px}.value{background:#fffaf2;border:1px solid var(--line);border-radius:12px;padding:13px}.value strong{display:block;font-size:.9rem;margin-bottom:4px}.value p{font-size:.84rem;color:var(--muted);margin:0}
+.challenge{margin-top:18px}.challenge label{display:block;font-weight:800;margin-bottom:8px}.challenge select{width:100%;padding:12px;border:1px solid var(--line);border-radius:10px;background:#fffaf2;color:var(--ink);font:inherit}.challenge .hint{font-size:.84rem;color:var(--muted);margin-top:8px}
+footer{padding:28px 4px 0;color:var(--muted);font-size:.8rem;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}.smallcaps{font-weight:800;letter-spacing:.12em;text-transform:uppercase}
+@media(max-width:520px){.wrap{padding:17px 12px 36px}.hero{padding:34px 0 20px}.bingo{gap:5px}.tile{min-height:105px;padding:8px 4px;border-radius:10px}.tile .txt{font-size:.7rem}.tile .num{font-size:.58rem}.values{grid-template-columns:1fr}.panelhead{flex-direction:column}.progressbox{width:100%;text-align:left}.bar{max-width:100%}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><span>Pancasila, IRL.</span><span class="pill">A tiny reflection game ✳</span></div>
+  <header class="hero">
+    <div class="eyebrow">Little things. Big values.</div>
+    <h1>How Pancasila<br>shows up <span>IRL.</span></h1>
+    <p>Pancasila bukan cuma lima sila yang dihafal. Coba lihat kebiasaan kecil yang pernah kamu lakukan—atau yang masih ingin kamu biasakan.</p>
+    <div class="note">No posting. No pressure. Just you.</div>
+  </header>
+  <section class="panel" aria-labelledby="bingoTitle">
+    <div class="panelhead">
+      <div><h2 id="bingoTitle">Your everyday bingo</h2><p class="sub">Ketuk kotak yang pernah kamu lakukan. Jujur aja—ini bukan ujian! ✦</p></div>
+      <div class="progressbox"><div class="count"><span id="count">0</span>/16</div><div class="sub">little actions</div><div class="bar"><span id="bar"></span></div></div>
+    </div>
+    <div class="bingo" id="bingo"></div>
+    <div class="actions"><button class="btn" id="decode">Decode my bingo ↗</button><button class="btn secondary" id="reset">Reset board</button></div>
+    <div class="result" id="result" aria-live="polite">
+      <h3 id="resultTitle">Your little wins count.</h3><p id="resultText"></p>
+      <div class="values" id="values"></div>
+      <div class="challenge">
+        <label for="challenge">Pick one small action to practice next</label>
+        <select id="challenge">
+          <option value="">Choose your next step…</option>
+          <option>Memberi kesempatan orang lain menyampaikan pendapat.</option>
+          <option>Memeriksa fakta sebelum membagikan informasi.</option>
+          <option>Menghargai orang yang berbeda denganku.</option>
+          <option>Membagi tugas kelompok secara lebih adil.</option>
+          <option>Mengkritik tindakan tanpa merendahkan orangnya.</option>
+          <option>Membantu seseorang tanpa mengharapkan imbalan.</option>
+        </select>
+        <p class="hint" id="hint">Pilih satu langkah kecil. Perubahan nggak harus dimulai dari hal besar.</p>
+      </div>
+    </div>
+  </section>
+  <footer><span class="smallcaps">Pancasila in everyday life</span><span>Made for reflection, not perfection.</span></footer>
+</div>
+<script>
+const items = [
+ {text:"Mendengarkan pendapat yang berbeda",sila:4},
+ {text:"Membantu teman tanpa diminta",sila:2},
+ {text:"Tidak ikut menyebarkan gosip",sila:2},
+ {text:"Menghargai perbedaan keyakinan",sila:1},
+ {text:"Berani mengakui kesalahan",sila:2},
+ {text:"Membagi tugas kelompok dengan adil",sila:5},
+ {text:"Membela teman yang dikucilkan",sila:2},
+ {text:"Memeriksa fakta sebelum share",sila:2},
+ {text:"Tidak memaksakan pendapat",sila:4},
+ {text:"Menghargai petugas kebersihan",sila:2},
+ {text:"Ikut mengambil keputusan bersama",sila:4},
+ {text:"Tidak membeda-bedakan teman",sila:3},
+ {text:"Menghormati hasil kesepakatan",sila:4},
+ {text:"Membantu tanpa mengharap imbalan",sila:2},
+ {text:"Mengkritik tanpa menghina",sila:2},
+ {text:"Memikirkan kepentingan bersama",sila:5}
+];
+const explanations = {
+ 1:["Ketuhanan Yang Maha Esa","Menghormati kebebasan beragama dan keyakinan orang lain, tanpa memaksa mereka mengikuti keyakinan kita."],
+ 2:["Kemanusiaan yang Adil dan Beradab","Memperlakukan orang dengan hormat, menjaga martabatnya, dan menghindari tindakan yang merendahkan atau menyakiti."],
+ 3:["Persatuan Indonesia","Persatuan bukan berarti semua harus sama. Kita bisa berbeda, tetap saling menghormati, dan bekerja sama."],
+ 4:["Kerakyatan yang Dipimpin oleh Hikmat Kebijaksanaan dalam Permusyawaratan/Perwakilan","Musyawarah berarti mendengar, mempertimbangkan pendapat, dan mencari keputusan bersama—bukan sekadar meminta persetujuan."],
+ 5:["Keadilan Sosial bagi Seluruh Rakyat Indonesia","Bersikap adil berarti mempertimbangkan hak, kebutuhan, dan tanggung jawab setiap orang, bukan selalu membagi semuanya secara identik."]
+};
+const board=document.getElementById('bingo');
+const chosen=new Set();
+items.forEach((item,i)=>{
+ const b=document.createElement('button'); b.className='tile'; b.type='button'; b.setAttribute('aria-pressed','false');
+ b.innerHTML=`<span class="num">ACTION ${String(i+1).padStart(2,'0')}</span><span class="txt">${item.text}</span><span class="check" aria-hidden="true"></span>`;
+ b.addEventListener('click',()=>{if(chosen.has(i)){chosen.delete(i);b.setAttribute('aria-pressed','false');b.querySelector('.check').textContent=''}else{chosen.add(i);b.setAttribute('aria-pressed','true');b.querySelector('.check').textContent='✓'}update()});
+ board.appendChild(b);
+});
+function update(){document.getElementById('count').textContent=chosen.size;document.getElementById('bar').style.width=(chosen.size/16*100)+'%'}
+document.getElementById('decode').addEventListener('click',()=>{
+ const result=document.getElementById('result'); result.classList.add('show');
+ const n=chosen.size;
+ document.getElementById('resultTitle').textContent=n===16?'All 16? Iconic. Keep it going!':n>=10?'Look at those little wins ✦':n>=5?'Every small action counts.':'A starting point, not a score.';
+ document.getElementById('resultText').textContent=n===0?'Kamu belum memilih kotak apa pun—nggak apa-apa. Coba baca daftarnya, lalu pilih yang pernah kamu lakukan. Tujuannya refleksi, bukan penilaian.':`Kamu memilih ${n} dari 16 tindakan. Ini bukan ukuran apakah kamu “orang baik” atau tidak—setiap tindakan adalah kebiasaan yang bisa terus dipelajari. Berikut nilai Pancasila yang terkait dengan contoh-contoh di bingo ini.`;
+ const relevant=[...new Set([...chosen].map(i=>items[i].sila))]; if(!relevant.length) relevant.push(1,2,3,4,5);
+ document.getElementById('values').innerHTML=relevant.map(s=>`<div class="value"><strong>Sila ${s} · ${explanations[s][0]}</strong><p>${explanations[s][1]}</p></div>`).join('');
+ result.scrollIntoView({behavior:'smooth',block:'start'});
+});
+document.getElementById('reset').addEventListener('click',()=>{chosen.clear();document.querySelectorAll('.tile').forEach(b=>{b.setAttribute('aria-pressed','false');b.querySelector('.check').textContent=''});update();document.getElementById('result').classList.remove('show')});
+document.getElementById('challenge').addEventListener('change',e=>{document.getElementById('hint').textContent=e.target.value?'Your next small step: '+e.target.value+' Kamu nggak harus sempurna—mulai dari satu tindakan.':'Pilih satu langkah kecil. Perubahan nggak harus dimulai dari hal besar.'});
+</script>
+</body>
+</html>
