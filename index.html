@@ -41,9 +41,9 @@ footer{padding:28px 4px 0;color:var(--muted);font-size:.8rem;display:flex;justif
 
 <div class="next-step">
   <p class="eyebrow">YOUR NEXT SMALL STEP</p>
-  <h3>Perubahan dimulai dari langkah kecil.</h3>
+  <h3> Pilih tindakan yang ingin kamu latih:</h3>
   <p class="hint" id="hint">
-    Pilih tindakan yang ingin kamu latih:
+    Perubahan dimulai dari langkah kecil.
   </p>
 
   <div id="recommendation"></div>
@@ -58,6 +58,16 @@ footer{padding:28px 4px 0;color:var(--muted);font-size:.8rem;display:flex;justif
   </select>
 
   <div id="extra-recommendation"></div>
+  
+<div id="commitment-area" style="margin-top:20px; text-align:center;">
+  <button type="button" id="commitment-button" disabled>
+    Saya siap berkomitmen ♡
+  </button>
+  <p id="commitment-message" class="hint" aria-live="polite">
+    Pilih satu tindakan dari dropdown untuk memulai.
+  </p>
+</div>
+
 </div>
       </div>
     </div>
@@ -174,16 +184,59 @@ function showRecommendation() {
 document.getElementById('shuffle')
   .addEventListener('click', showRecommendation);
 
-challenge.addEventListener('change', () => {
-  const index = Number(challenge.value);
 
+let selectedCommitment = "";
+let commitmentSubmitted = false;
+
+const commitmentButton = document.getElementById('commitment-button');
+const commitmentMessage = document.getElementById('commitment-message');
+
+challenge.addEventListener('change', () => {
   if (challenge.value === "") {
+    selectedCommitment = "";
     extra.textContent = "";
+    commitmentButton.disabled = true;
+    commitmentMessage.textContent =
+      "Pilih satu tindakan dari dropdown untuk memulai.";
     return;
   }
 
-  extra.textContent =
-    "Your chosen next step: " + items[index].text;
+  const index = Number(challenge.value);
+
+  selectedCommitment = items[index].text;
+  extra.textContent = "Your chosen next step: " + selectedCommitment;
+
+  commitmentButton.disabled = commitmentSubmitted;
+  commitmentMessage.textContent = commitmentSubmitted
+    ? "Komitmenmu sudah tercatat. Terima kasih ♡"
+    : "Langkah kecil, komitmen nyata. ♡";
+});
+
+commitmentButton.addEventListener('click', async () => {
+  if (!selectedCommitment || commitmentSubmitted) return;
+
+  commitmentButton.disabled = true;
+  commitmentMessage.textContent = "Mencatat komitmenmu...";
+
+  try {
+    const response = await fetch(
+      'https://pancabingo-counter.emailvarisha.workers.dev/complete',
+      { method: 'POST' }
+    );
+
+    if (!response.ok) throw new Error('Gagal mencatat komitmen');
+
+    const data = await response.json();
+
+    commitmentSubmitted = true;
+    document.getElementById('reflection-total').textContent = data.total;
+    commitmentMessage.textContent =
+      "Komitmenmu sudah tercatat. Mulai dari satu langkah kecil ♡";
+  } catch (error) {
+    commitmentButton.disabled = false;
+    commitmentMessage.textContent =
+      "Komitmen belum tercatat. Coba klik sekali lagi, ya.";
+  }
 });
 
 showRecommendation();
@@ -191,9 +244,9 @@ showRecommendation();
 </script>
  
 <div id="reflection-counter" style="text-align:center; padding:24px 16px; font-size:14px; opacity:0.8;">
-  <div style="margin-bottom:6px;">A little space for reflection ♡</div>
+  <div style="margin-bottom:6px;">Small steps, real commitments ♡</div>
   <div id="reflection-total" style="font-size:28px; font-weight:700;">—</div>
-  <div>reflections shared so far</div>
+  <div>commitments made so far</div>
 </div>
 
 <script>
