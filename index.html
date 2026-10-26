@@ -112,12 +112,7 @@ function update(){document.getElementById('count').textContent=chosen.size;docum
 document.getElementById('decode').addEventListener('click',()=>{
  if (!window.reflectionCounted) {
    window.reflectionCounted = true;
-   fetch('https://pancabingo-counter.emailvarisha.workers.dev/complete', {
-     method: 'POST'
-   }).catch(() => {
-     window.reflectionCounted = false;
-   });
- }
+  
  const result=document.getElementById('result'); result.classList.add('show');
  const n=chosen.size;
  document.getElementById('resultTitle').textContent=n===16?'All 16? Iconic. Keep it going!':n>=10?'Look at those little wins ✦':n>=5?'Every small action counts.':'A starting point, not a score.';
@@ -219,10 +214,6 @@ commitmentButton.addEventListener('click', async () => {
   commitmentMessage.textContent = "Mencatat komitmenmu...";
 
   try {
-    const response = await fetch(
-      'https://pancabingo-counter.emailvarisha.workers.dev/complete',
-      { method: 'POST' }
-    );
 
     if (!response.ok) throw new Error('Gagal mencatat komitmen');
 
