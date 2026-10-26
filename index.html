@@ -39,16 +39,27 @@ footer{padding:28px 4px 0;color:var(--muted);font-size:.8rem;display:flex;justif
       <div class="values" id="values"></div>
       <div class="challenge">
         <label for="challenge">Pilih satu langkah kecil yang ingin kamu latih kedepannya</label>
-        <select id="challenge">
-          <option value="">Choose your next step…</option>
-          <option>Memberi kesempatan orang lain menyampaikan pendapat.</option>
-          <option>Memeriksa fakta sebelum membagikan informasi.</option>
-          <option>Menghargai orang yang berbeda denganku.</option>
-          <option>Membagi tugas kelompok secara lebih adil.</option>
-          <option>Mengkritik tindakan tanpa merendahkan orangnya.</option>
-          <option>Membantu seseorang tanpa mengharapkan imbalan.</option>
-        </select>
-        <p class="hint" id="hint">Pilih satu langkah kecil. Perubahan nggak harus dimulai dari hal besar.</p>
+
+<div class="next-step">
+  <p class="eyebrow">YOUR NEXT SMALL STEP</p>
+  <h3>One small thing to try next.</h3>
+  <p class="hint" id="hint">
+    Pilih satu langkah kecil. Perubahan nggak harus dimulai dari hal besar.
+  </p>
+
+  <div id="recommendation"></div>
+
+  <button type="button" id="shuffle">
+    ↻ Give me another idea
+  </button>
+
+  <label for="challenge">Or choose your own:</label>
+  <select id="challenge">
+    <option value="">Explore unselected actions…</option>
+  </select>
+
+  <div id="extra-recommendation"></div>
+</div>
       </div>
     </div>
   </section>
@@ -99,7 +110,77 @@ document.getElementById('decode').addEventListener('click',()=>{
  result.scrollIntoView({behavior:'smooth',block:'start'});
 });
 document.getElementById('reset').addEventListener('click',()=>{chosen.clear();document.querySelectorAll('.tile').forEach(b=>{b.setAttribute('aria-pressed','false');b.querySelector('.check').textContent=''});update();document.getElementById('result').classList.remove('show')});
-document.getElementById('challenge').addEventListener('change',e=>{document.getElementById('hint').textContent=e.target.value?'Your next small step: '+e.target.value+' Kamu nggak harus sempurna—mulai dari satu tindakan.':'Pilih satu langkah kecil. Perubahan nggak harus dimulai dari hal besar.'});
+
+const recommendation = document.getElementById('recommendation');
+const challenge = document.getElementById('challenge');
+const extra = document.getElementById('extra-recommendation');
+
+const extraIdeas = [
+  "Ajak seseorang berdiskusi dan dengarkan pendapatnya sampai selesai.",
+  "Coba membantu orang lain tanpa mengharapkan balasan.",
+  "Pikirkan apakah keputusanmu hari ini sudah mempertimbangkan kepentingan bersama.",
+  "Luangkan waktu untuk memahami sudut pandang yang berbeda dari milikmu."
+];
+
+let lastRecommendation = -1;
+
+function getRemaining() {
+  return items
+    .map((item, i) => ({ ...item, index: i }))
+    .filter(item => !chosen.has(item.index));
+}
+
+function showRecommendation() {
+  const remaining = getRemaining();
+
+  challenge.innerHTML =
+    '<option value="">Explore unselected actions…</option>';
+
+  remaining.forEach(item => {
+    const option = document.createElement('option');
+    option.value = item.index;
+    option.textContent = item.text;
+    challenge.appendChild(option);
+  });
+
+  if (remaining.length === 0) {
+    recommendation.textContent =
+      "Kamu sudah memilih semua tindakan di bingo! ✨";
+    extra.textContent =
+      extraIdeas[Math.floor(Math.random() * extraIdeas.length)];
+    return;
+  }
+
+  const options = remaining.filter(
+    item => item.index !== lastRecommendation
+  );
+
+  const pick = options[
+    Math.floor(Math.random() * options.length)
+  ];
+
+  lastRecommendation = pick.index;
+  recommendation.textContent = pick.text;
+  extra.textContent = "";
+}
+
+document.getElementById('shuffle')
+  .addEventListener('click', showRecommendation);
+
+challenge.addEventListener('change', () => {
+  const index = Number(challenge.value);
+
+  if (challenge.value === "") {
+    extra.textContent = "";
+    return;
+  }
+
+  extra.textContent =
+    "Your chosen next step: " + items[index].text;
+});
+
+showRecommendation();
+
 </script>
 </body>
 </html>
